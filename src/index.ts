@@ -1,7 +1,7 @@
 // src/index.ts
 import express from "express";
 import dotenv from "dotenv";
-import vendedoresRoutes from "./routes/vendedoresRoutes";
+import routerRoutes from "./routes/routerRoutes";
 import { sequelize } from "./config/sequelize.config";
 
 dotenv.config();
@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
-app.use("/", vendedoresRoutes);
+app.use("/", routerRoutes);
 
 sequelize
   .sync()
