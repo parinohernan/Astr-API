@@ -1,0 +1,17 @@
+{
+  "CodeGPT.model": "CodeGPT Plus",
+  "CodeGPT.organizationId": "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",
+  "CodeGPT.query.language": "Spanish",
+  "CodeGPT.Autocomplete.enabled": true,
+  "CodeGPT.Autocomplete.provider": "CodeGPT Plus - Plus",
+  "editor.defaultFormatter": "DanielSanMedium.dscodegpt",
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}
