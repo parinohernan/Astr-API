@@ -1,0 +1,25 @@
++---------------------+           +-------------------+
+| PreventaCabeza      |           | PreventaItem      |
+|---------------------|           |-------------------|
+| - DocumentoTipo     | 1       N | - DocumentoTipo   |
+| - DocumentoSucursal |-----------| - DocumentoSucursal|
+| - DocumentoNumero   |           | - DocumentoNumero |
+| - ...               |           | - CodigoArticulo  |
+|                     |           | - Cantidad        |
+|                     |           | - PrecioUnitario  |
+|                     |           | - PrecioLista     |
+|                     |           | - ...             |
+|                     |           +-------------------+
+|                     |
+|   +---------------+ | itemsTipo
+|   |               |-|------------>
+|   | PreventaItem  | |             +-------------------+
+|   |               |-| itemsSucursal | PreventaCabeza|
+|   +---------------+ |               |               |
+|                     |             +-------------------+
+|   +---------------+ | itemsNumero
+|   |               |-|------------>
+|   | PreventaItem  | |
+|   |               |-|
+|   +---------------+ |
++---------------------+
