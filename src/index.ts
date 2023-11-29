@@ -2,8 +2,9 @@
 import express from "express";
 import dotenv from "dotenv";
 import vendedoresRoutes from "./routes/vendedoresRoutes";
+import { sequelize } from "./config/sequelize.config";
 
-dotenv.config(); // Cargar variables de entorno desde el archivo .env
+dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -12,6 +13,15 @@ app.use(express.json());
 
 app.use("/", vendedoresRoutes);
 
-app.listen(PORT, () => {
-  console.log(`Servidor escuchando en el puerto ${PORT}`);
-});
+sequelize
+  .sync()
+  .then(() => {
+    console.log("Conexión a la base de datos exitosa");
+
+    app.listen(PORT, () => {
+      console.log(`Servidor escuchando en el puerto ${PORT}`);
+    });
+  })
+  .catch((error) =>
+    console.error("Error al conectar con la base de datos:", error)
+  );
