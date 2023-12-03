@@ -5,7 +5,9 @@ import Cliente from "../models/Cliente";
 // Obtener todos los clientes
 export const getClientes = async (req: Request, res: Response) => {
   try {
-    const clientes = await Cliente.findAll();
+    const clientes = await Cliente.findAll({
+      limit: 10, // Limitar a 10 clientes
+    });
     res.json(clientes);
   } catch (error) {
     console.error("Error al obtener clientes:", error);

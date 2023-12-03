@@ -1,6 +1,7 @@
 // src/index.ts
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors";
 import routerRoutes from "./routes/routerRoutes";
 import { sequelize } from "./config/sequelize.config";
 
@@ -10,6 +11,9 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
+
+// Configura el middleware de CORS
+app.use(cors());
 
 app.use("/", routerRoutes);
 
