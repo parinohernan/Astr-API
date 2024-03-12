@@ -48,36 +48,36 @@ Articulo.init(
       defaultValue: 0,
       field: "Existencia",
     },
-    existenciaMinima: {
-      type: DataTypes.DOUBLE,
-      allowNull: false,
-      defaultValue: 0,
-      field: "ExistenciaMinima",
-    },
-    existenciaMaxima: {
-      type: DataTypes.DOUBLE,
-      allowNull: false,
-      defaultValue: 0,
-      field: "ExistenciaMaxima",
-    },
+    // existenciaMinima: {
+    //   type: DataTypes.DOUBLE,
+    //   allowNull: false,
+    //   defaultValue: 0,
+    //   field: "ExistenciaMinima",
+    // },
+    // existenciaMaxima: {
+    //   type: DataTypes.DOUBLE,
+    //   allowNull: false,
+    //   defaultValue: 0,
+    //   field: "ExistenciaMaxima",
+    // },
     precioCostoMasImp: {
       type: DataTypes.DOUBLE,
       allowNull: false,
       defaultValue: 0,
       field: "PrecioCostoMasImp",
     },
-    porcentajeIVA1: {
-      type: DataTypes.DOUBLE,
-      allowNull: false,
-      defaultValue: 0,
-      field: "PorcentajeIVA1",
-    },
-    porcentajeIVA2: {
-      type: DataTypes.DOUBLE,
-      allowNull: false,
-      defaultValue: 0,
-      field: "PorcentajeIVA2",
-    },
+    // porcentajeIVA1: {
+    //   type: DataTypes.DOUBLE,
+    //   allowNull: false,
+    //   defaultValue: 0,
+    //   field: "PorcentajeIVA1",
+    // },
+    // porcentajeIVA2: {
+    //   type: DataTypes.DOUBLE,
+    //   allowNull: false,
+    //   defaultValue: 0,
+    //   field: "PorcentajeIVA2",
+    // },
     precioCosto: {
       type: DataTypes.DOUBLE,
       allowNull: false,
@@ -119,43 +119,43 @@ Articulo.init(
       defaultValue: 0,
       field: "Lista5",
     },
-    proveedorCodigo: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      field: "ProveedorCodigo",
-    },
+    // proveedorCodigo: {
+    //   type: DataTypes.STRING,
+    //   allowNull: false,
+    //   field: "ProveedorCodigo",
+    // },
     rubroCodigo: {
       type: DataTypes.STRING,
       allowNull: false,
       field: "RubroCodigo",
     },
-    peso: {
-      type: DataTypes.DOUBLE,
-      allowNull: false,
-      defaultValue: 0,
-      field: "Peso",
-    },
-    siempreSeDescarga: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      field: "SiempreSeDescarga",
-    },
-    iva2SobreNeto: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      field: "Iva2SobreNeto",
-    },
-    porcentajeVendedor: {
-      type: DataTypes.DOUBLE,
-      allowNull: false,
-      defaultValue: 0,
-      field: "PorcentajeVendedor",
-    },
-    descuentoXCantidad: {
-      type: DataTypes.STRING,
-      allowNull: true,
-      field: "DescuentoXCantidad",
-    },
+    // peso: {
+    //   type: DataTypes.DOUBLE,
+    //   allowNull: false,
+    //   defaultValue: 0,
+    //   field: "Peso",
+    // },
+    // siempreSeDescarga: {
+    //   type: DataTypes.BOOLEAN,
+    //   allowNull: false,
+    //   field: "SiempreSeDescarga",
+    // },
+    // iva2SobreNeto: {
+    //   type: DataTypes.BOOLEAN,
+    //   allowNull: false,
+    //   field: "Iva2SobreNeto",
+    // },
+    // porcentajeVendedor: {
+    //   type: DataTypes.DOUBLE,
+    //   allowNull: false,
+    //   defaultValue: 0,
+    //   field: "PorcentajeVendedor",
+    // },
+    // descuentoXCantidad: {
+    //   type: DataTypes.STRING,
+    //   allowNull: true,
+    //   field: "DescuentoXCantidad",
+    // },
     // ... otros campos según tu esquema
   },
   {

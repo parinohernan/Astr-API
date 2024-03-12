@@ -3,6 +3,7 @@ import express from "express";
 import vendedoresRoutes from "./vendedoresRoutes";
 import clientesRoutes from "./clientesRoutes";
 import articulosRoutes from "./articulosRoutes";
+import { crearPreventa } from "../controllers/preventasController";
 
 const router = express.Router();
 
@@ -10,4 +11,5 @@ const router = express.Router();
 router.get("/clientes", clientesRoutes);
 router.get("/vendedores", vendedoresRoutes);
 router.get("/articulos", articulosRoutes);
+router.post("/preventas", crearPreventa);
 export default router;

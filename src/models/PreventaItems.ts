@@ -1,9 +1,9 @@
-// src/models/PreventaItem.ts
+// src/models/PreventaItems.ts
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../config/sequelize.config";
-import PreventaCabeza from "./PreventaCabeza";
+// import PreventaCabeza from "./PreventaCabeza";
 
-class PreventaItem extends Model {
+class PreventaItems extends Model {
   public DocumentoTipo!: string;
   public DocumentoSucursal!: string;
   public DocumentoNumero!: string;
@@ -17,7 +17,7 @@ class PreventaItem extends Model {
   // Otros campos específicos de preventa_items
 }
 
-PreventaItem.init(
+PreventaItems.init(
   {
     DocumentoTipo: {
       type: DataTypes.STRING,
@@ -43,55 +43,53 @@ PreventaItem.init(
       type: DataTypes.DOUBLE,
       allowNull: false,
     },
-    PrecioLista: {
-      type: DataTypes.DOUBLE,
-      allowNull: false,
-    },
+    // PrecioLista: {
+    //   type: DataTypes.DOUBLE,
+    //   allowNull: false,
+    // },
     PorcentajeBonificacion: {
       type: DataTypes.DOUBLE,
       allowNull: false,
     },
-    // ... otros campos específicos de preventa_items
 
     // Campos específicos de preventa_items
-    id_preventa_item: {
+    id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
-      autoIncrement: true,
     },
     // ... otros campos específicos de preventa_items
   },
   {
     sequelize,
-    modelName: "PreventaItem",
-    tableName: "preventa_item",
+    modelName: "PreventaItems",
+    tableName: "preventa_items",
     timestamps: false, // Ajusta esto según tus necesidades
   }
 );
 // Establece la relación con la tabla preventa_cabeza
-PreventaItem.belongsTo(PreventaCabeza, {
-  foreignKey: {
-    name: "DocumentoTipo",
-    field: "DocumentoTipo",
-  },
-  targetKey: "DocumentoTipo",
-});
+// PreventaItems.belongsTo(PreventaCabeza, {
+//   foreignKey: {
+//     name: "DocumentoTipo",
+//     field: "DocumentoTipo",
+//   },
+//   targetKey: "DocumentoTipo",
+// });
 
-PreventaItem.belongsTo(PreventaCabeza, {
-  foreignKey: {
-    name: "DocumentoSucursal",
-    field: "DocumentoSucursal",
-  },
-  targetKey: "DocumentoSucursal",
-});
+// PreventaItems.belongsTo(PreventaCabeza, {
+//   foreignKey: {
+//     name: "DocumentoSucursal",
+//     field: "DocumentoSucursal",
+//   },
+//   targetKey: "DocumentoSucursal",
+// });
 
-PreventaItem.belongsTo(PreventaCabeza, {
-  foreignKey: {
-    name: "DocumentoNumero",
-    field: "DocumentoNumero",
-  },
-  targetKey: "DocumentoNumero",
-});
+// PreventaItems.belongsTo(PreventaCabeza, {
+//   foreignKey: {
+//     name: "DocumentoNumero",
+//     field: "DocumentoNumero",
+//   },
+//   targetKey: "DocumentoNumero",
+// });
 
-export default PreventaItem;
+export default PreventaItems;

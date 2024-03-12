@@ -1,4 +1,5 @@
-// src/models/Preventa.ts
+// creo que este modelo no se usa
+
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../config/sequelize.config";
 

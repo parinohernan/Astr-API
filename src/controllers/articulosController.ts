@@ -5,9 +5,7 @@ import Articulo from "../models/Articulo";
 // Obtener todos los artículos
 export const getArticulos = async (req: Request, res: Response) => {
   try {
-    const articulos = await Articulo.findAll({
-      limit: 100, // Limitar a 100 articulos
-    });
+    const articulos = await Articulo.findAll();
     res.json(articulos);
   } catch (error) {
     console.error("Error al obtener artículos:", error);

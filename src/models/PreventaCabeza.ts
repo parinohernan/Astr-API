@@ -1,7 +1,7 @@
 // src/models/PreventaCabeza.ts
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../config/sequelize.config";
-import PreventaItem from "./PreventaItem"; // Importa el modelo de PreventaItem
+import PreventaItem from "./PreventaItems"; // Importa el modelo de PreventaItem
 
 class PreventaCabeza extends Model {
   public DocumentoTipo!: string;
@@ -13,25 +13,22 @@ class PreventaCabeza extends Model {
   public VendedorCodigo!: string;
   public PagoTipo!: string;
   public ImporteBruto!: number;
-  public PorcentajeBonificacion!: number;
+  // public PorcentajeBonificacion!: number;
   public ImporteBonificado!: number;
-  public ImporteNeto!: number;
-  public ImporteAdicional!: number;
-  public ImporteIva1!: number;
-  public ImporteIva2!: number;
-  public ImporteTotal!: number;
-  public ImportePagado!: number;
-  public PorcentajeIva1!: number;
-  public PorcentajeIva2!: number;
+  // public ImporteNeto!: number;
+  // public ImporteAdicional!: number;
+  // public ImporteIva1!: number;
+  // public ImporteIva2!: number;
+  // public ImporteTotal!: number;
+  // public ImportePagado!: number;
+  // public PorcentajeIva1!: number;
+  // public PorcentajeIva2!: number;
   public ListaNumero!: number;
-  public FechaAnulacion!: Date;
   public cant_items!: number;
   public Observacion!: string;
-  public Latitud!: number;
-  public Longitud!: number;
 
   // Relación con la tabla preventa_item
-  public items!: PreventaItem[];
+  // public items!: PreventaItem[];
 }
 
 PreventaCabeza.init(
@@ -47,6 +44,7 @@ PreventaCabeza.init(
     DocumentoNumero: {
       type: DataTypes.STRING,
       allowNull: false,
+      primaryKey: true,
     },
     Fecha: {
       type: DataTypes.DATE,
@@ -54,7 +52,7 @@ PreventaCabeza.init(
     },
     FechaHoraEnvio: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
     },
     ClienteCodigo: {
       type: DataTypes.STRING,
@@ -64,63 +62,23 @@ PreventaCabeza.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    PagoTipo: {
-      type: DataTypes.STRING,
+    ImporteTotal: {
+      type: DataTypes.DOUBLE,
       allowNull: false,
     },
     ImporteBruto: {
       type: DataTypes.DOUBLE,
       allowNull: false,
     },
-    PorcentajeBonificacion: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
     ImporteBonificado: {
       type: DataTypes.DOUBLE,
       allowNull: false,
     },
-    ImporteNeto: {
-      type: DataTypes.DOUBLE,
-      allowNull: false,
-    },
-    ImporteAdicional: {
-      type: DataTypes.DOUBLE,
-      allowNull: false,
-    },
-    ImporteIva1: {
-      type: DataTypes.DOUBLE,
-      allowNull: false,
-    },
-    ImporteIva2: {
-      type: DataTypes.DOUBLE,
-      allowNull: false,
-    },
-    ImporteTotal: {
-      type: DataTypes.DOUBLE,
-      allowNull: false,
-    },
-    ImportePagado: {
-      type: DataTypes.DOUBLE,
-      allowNull: false,
-    },
-    PorcentajeIva1: {
-      type: DataTypes.DOUBLE,
-      allowNull: false,
-    },
-    PorcentajeIva2: {
-      type: DataTypes.DOUBLE,
-      allowNull: false,
-    },
     ListaNumero: {
-      type: DataTypes.TINYINT,
+      type: DataTypes.DOUBLE,
       allowNull: false,
     },
-    FechaAnulacion: {
-      type: DataTypes.DATE,
-      allowNull: true,
-    },
-    cant_items: {
+    Cant_items: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
@@ -128,15 +86,10 @@ PreventaCabeza.init(
       type: DataTypes.STRING,
       allowNull: true,
     },
-    Latitud: {
-      type: DataTypes.DOUBLE,
-      allowNull: false,
+    PagoTipo: {
+      type: DataTypes.STRING,
+      allowNull: true,
     },
-    Longitud: {
-      type: DataTypes.DOUBLE,
-      allowNull: false,
-    },
-    // ... otros campos específicos de preventa_cabeza
   },
   {
     sequelize,
@@ -148,31 +101,31 @@ PreventaCabeza.init(
 
 // Establece la relación con la tabla preventa_item
 // Establece las relaciones con la tabla preventa_item
-PreventaCabeza.hasMany(PreventaItem, {
-  foreignKey: {
-    name: "DocumentoTipo", // Campo de relación en PreventaItem
-    field: "DocumentoTipo", // Campo de relación en PreventaCabeza
-  },
-  sourceKey: "DocumentoTipo", // Campo en PreventaCabeza que coincide con el campo en PreventaItem
-  as: "itemsTipo", // Alias para la relación
-});
+// PreventaCabeza.hasMany(PreventaItem, {
+//   foreignKey: {
+//     name: "DocumentoTipo", // Campo de relación en PreventaItem
+//     field: "DocumentoTipo", // Campo de relación en PreventaCabeza
+//   },
+//   sourceKey: "DocumentoTipo", // Campo en PreventaCabeza que coincide con el campo en PreventaItem
+//   as: "itemsTipo", // Alias para la relación
+// });
 
-PreventaCabeza.hasMany(PreventaItem, {
-  foreignKey: {
-    name: "DocumentoSucursal",
-    field: "DocumentoSucursal",
-  },
-  sourceKey: "DocumentoSucursal",
-  as: "itemsSucursal",
-});
+// PreventaCabeza.hasMany(PreventaItem, {
+//   foreignKey: {
+//     name: "DocumentoSucursal",
+//     field: "DocumentoSucursal",
+//   },
+//   sourceKey: "DocumentoSucursal",
+//   as: "itemsSucursal",
+// });
 
-PreventaCabeza.hasMany(PreventaItem, {
-  foreignKey: {
-    name: "DocumentoNumero",
-    field: "DocumentoNumero",
-  },
-  sourceKey: "DocumentoNumero",
-  as: "itemsNumero",
-});
+// PreventaCabeza.hasMany(PreventaItem, {
+//   foreignKey: {
+//     name: "DocumentoNumero",
+//     field: "DocumentoNumero",
+//   },
+//   sourceKey: "DocumentoNumero",
+//   as: "itemsNumero",
+// });
 
 export default PreventaCabeza;
