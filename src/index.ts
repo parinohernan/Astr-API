@@ -1,4 +1,3 @@
-// src/index.ts
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -12,7 +11,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
-// Configura el middleware de CORS
+// Configura el middleware de CORS para permitir todas las solicitudes
 app.use(cors());
 
 app.use("/", routerRoutes);

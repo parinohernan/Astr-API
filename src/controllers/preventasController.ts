@@ -57,10 +57,9 @@ export const crearPreventa = async (req: Request, res: Response) => {
         id: idCreado,
       });
     }
-
     res.status(201).json({ message: "Preventa creada exitosamente" });
-  } catch (error) {
-    console.error("Error al crear preventa:", error);
+  } catch (error: any) {
+    console.error("Error al crear preventa:", error.message);
     res.status(500).json({ message: "Error al crear preventa" });
   }
 };

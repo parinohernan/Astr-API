@@ -8,6 +8,9 @@ import { crearPreventa } from "../controllers/preventasController";
 const router = express.Router();
 
 // Endpoint para obtener todos los clientes
+router.get("/", (req, res) => {
+  res.send("OK");
+});
 router.get("/clientes", clientesRoutes);
 router.get("/vendedores", vendedoresRoutes);
 router.get("/articulos", articulosRoutes);
