@@ -9,7 +9,7 @@ const router = express.Router();
 
 // Endpoint para obtener todos los clientes
 router.get("/", (req, res) => {
-  res.send("OK");
+  res.send("OK- el servidor esta funcionando.");
 });
 router.get("/clientes", clientesRoutes);
 router.get("/vendedores", vendedoresRoutes);
