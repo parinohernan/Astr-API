@@ -9,10 +9,11 @@ const router = express.Router();
 
 // Endpoint para obtener todos los clientes
 router.get("/", (req, res) => {
-  res.send("OK- el servidor esta funcionando.");
+  res.send("OK- el servidor esta online.");
 });
 router.get("/clientes", clientesRoutes);
 router.get("/vendedores", vendedoresRoutes);
 router.get("/articulos", articulosRoutes);
+router.get("/articulosfrecuentes", articulosRoutes);
 router.post("/preventas", crearPreventa);
 export default router;

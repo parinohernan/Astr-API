@@ -11,4 +11,11 @@ const sequelize = new Sequelize({
   database: process.env.DB_NAME || "preventas",
 });
 
-export { sequelize };
+const sequelizeAstrial = new Sequelize({
+  dialect: "mysql",
+  host: process.env.DB_HOST_ASTRIAL || "localhost",
+  username: process.env.DB_USER_ASTRIAL || "root",
+  password: process.env.DB_PASSWORD_ASTRIAL || "",
+  database: process.env.DB_NAME_ASTRIAL || "db_sis_fac",
+});
+export { sequelize, sequelizeAstrial };

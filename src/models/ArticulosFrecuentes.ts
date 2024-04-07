@@ -1,6 +1,6 @@
 // src/models/Articulo.ts
 import { DataTypes, Model } from "sequelize";
-import { sequelize } from "../config/sequelize.config";
+import { sequelizeAstrial } from "../config/sequelize.config";
 
 class ArticulosFrecuentes extends Model {
   public codigo!: string;
@@ -159,8 +159,8 @@ ArticulosFrecuentes.init(
     // ... otros campos según tu esquema
   },
   {
-    sequelize,
-    modelName: "Articulo",
+    sequelize: sequelizeAstrial,
+    modelName: "ArticulosFrecuentes",
     tableName: "t_articulos",
     timestamps: false, // Puedes ajustar esto según tus necesidades
   }
