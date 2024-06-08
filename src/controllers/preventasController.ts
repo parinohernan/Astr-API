@@ -21,7 +21,8 @@ export const crearPreventa = async (req: Request, res: Response) => {
       ImporteBonificado,
       PagoTipo,
     } = req.body;
-
+    console.log("body enviando preventa ",req.body);
+    
     // Insertar en preventa_cabeza
     const preventaCabeza = await PreventaCabeza.create({
       DocumentoTipo,
@@ -44,15 +45,16 @@ export const crearPreventa = async (req: Request, res: Response) => {
     let idCreado: number = +preventaCabeza.DocumentoNumero * 100; // no me permitira mas de 999 items por preventa
     for (const item of items) {
       idCreado++;
-      // console.log("Body items :", item, "id ", idCreado);
+      console.log("!!preciolista items :", item.PrecioLista);
       await PreventaItem.create({
         DocumentoTipo: preventaCabeza.DocumentoTipo,
         DocumentoSucursal: preventaCabeza.DocumentoSucursal,
         DocumentoNumero: preventaCabeza.DocumentoNumero,
         CodigoArticulo: item.CodigoArticulo,
+        // VendedorCodigo: item.VendedorCodigo,
         Cantidad: item.Cantidad,
-        PrecioUnitario: item.PrecioUnitario,
-        PrecioLista: item.PrecioLista,
+        PrecioUnitario: (item.PrecioUnitario ), //estos deberian llegar sin iva
+        PrecioLista: (item.PrecioLista ),
         PorcentajeBonificacion: item.PorcentajeBonificacion,
         id: idCreado,
       });

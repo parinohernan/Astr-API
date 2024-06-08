@@ -22,14 +22,17 @@ PreventaItems.init(
     DocumentoTipo: {
       type: DataTypes.STRING,
       allowNull: false,
+      primaryKey: true,
     },
     DocumentoSucursal: {
       type: DataTypes.STRING,
       allowNull: false,
+      primaryKey: true,
     },
     DocumentoNumero: {
       type: DataTypes.STRING,
       allowNull: false,
+      primaryKey: true,
     },
     CodigoArticulo: {
       type: DataTypes.STRING,
@@ -43,21 +46,21 @@ PreventaItems.init(
       type: DataTypes.DOUBLE,
       allowNull: false,
     },
-    // PrecioLista: {
-    //   type: DataTypes.DOUBLE,
-    //   allowNull: false,
-    // },
+    PrecioLista: {
+      type: DataTypes.DOUBLE,
+      allowNull: false,
+    },
     PorcentajeBonificacion: {
       type: DataTypes.DOUBLE,
       allowNull: false,
     },
 
     // Campos específicos de preventa_items
-    id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-    },
+    // id: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: false,
+    //   primaryKey: true,
+    // },
     // ... otros campos específicos de preventa_items
   },
   {

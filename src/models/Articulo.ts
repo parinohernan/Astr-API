@@ -66,12 +66,12 @@ Articulo.init(
       defaultValue: 0,
       field: "PrecioCostoMasImp",
     },
-    // porcentajeIVA1: {
-    //   type: DataTypes.DOUBLE,
-    //   allowNull: false,
-    //   defaultValue: 0,
-    //   field: "PorcentajeIVA1",
-    // },
+    porcentajeIVA1: {
+      type: DataTypes.DOUBLE,
+      allowNull: false,
+      defaultValue: 0,
+      field: "PorcentajeIVA1",
+    },
     // porcentajeIVA2: {
     //   type: DataTypes.DOUBLE,
     //   allowNull: false,

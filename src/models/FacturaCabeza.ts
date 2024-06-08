@@ -23,10 +23,12 @@ FacturaCabeza.init(
     DocumentoTipo: {
       type: DataTypes.STRING,
       allowNull: false,
+      primaryKey: true,
     },
     DocumentoSucursal: {
       type: DataTypes.STRING,
       allowNull: false,
+      primaryKey: true,
     },
     DocumentoNumero: {
       type: DataTypes.STRING,

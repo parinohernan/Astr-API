@@ -57,6 +57,7 @@ FacturaItems.belongsTo(FacturaCabeza, {
     field: "DocumentoTipo",
   },
   targetKey: "DocumentoTipo",
+  as: "facturaCabezaTipo",
 });
 FacturaItems.belongsTo(FacturaCabeza, {
   foreignKey: {
@@ -64,6 +65,7 @@ FacturaItems.belongsTo(FacturaCabeza, {
     field: "DocumentoSucursal",
   },
   targetKey: "DocumentoSucursal",
+  as: "facturaCabezaSucursal",
 });
 FacturaItems.belongsTo(FacturaCabeza, {
   foreignKey: {
@@ -71,6 +73,7 @@ FacturaItems.belongsTo(FacturaCabeza, {
     field: "DocumentoNumero",
   },
   targetKey: "DocumentoNumero",
+  as: "facturaCabezaNumero",
 });
 
 export default FacturaItems;

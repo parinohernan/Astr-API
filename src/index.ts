@@ -8,9 +8,11 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+var morgan = require('morgan')
+
 
 app.use(express.json());
-
+app.use(morgan('combined'))
 // Configura el middleware de CORS para permitir todas las solicitudes
 app.use(cors());
 
