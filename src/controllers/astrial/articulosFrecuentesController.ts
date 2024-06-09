@@ -1,112 +1,70 @@
-// import { Request, Response } from "express";
-// import FacturaCabeza from "../../models/FacturaCabeza";
-// import FacturaItems from "../../models/FacturaItems";
-// import { Op } from "sequelize";
+import mysql from "mysql";
+import { Request, Response } from "express";
+import dotenv from "dotenv";
 
-// export const getArticulosFrecuentes = async (req: Request, res: Response) => {
-//   try {
-//     const clienteCodigo = req.query.clienteCodigo as string;
-//     const fechaDesde = req.query.fechaDesde as string;
-//     const fechaHasta = req.query.fechaHasta as string;
+dotenv.config();
 
-//     // Realiza la consulta para obtener los códigos de artículo frecuentes
-//     const articulosFrecuentes = await FacturaItems.findAll({
-//       attributes: ["CodigoArticulo"], // Obtener solo los códigos de artículo
-//       include: [
-//         {
-//           model: FacturaCabeza,
-//           where: {
-//             ClienteCodigo: clienteCodigo, // Filtro por clienteCodigo en FacturaCabeza
-//             Fecha: {
-//               [Op.between]: [fechaDesde, fechaHasta], // Filtro por fecha
-//             },
-//             // Otras condiciones de filtrado si es necesario
-//           },
-//           required: true, // INNER JOIN
-//         },
-//       ],
-//       raw: true, // Obtener resultados como objetos JSON simples
-//     });
+const db = mysql.createConnection({
+  host: process.env.HOST_ASTRIAL || "localhost",
+  user: process.env.DB_USER_ASTRIAL,
+  password: process.env.DB_PASSWORD_ASTRIAL,
+  database: process.env.DB_NAME_ASTRIAL,
+});
 
-//     // Extrae los códigos de artículo de los resultados
-//     const codigosArticuloFrecuentes = articulosFrecuentes.map(
-//       (articulo) => articulo.CodigoArticulo
-//     );
+// Conectar a la base de datos
+db.connect((err: any) => {
+  if (err) {
+    console.error("Error al conectar a la base de datos:", err);
+    return;
+  }
+  console.log("Conectado a la base de datos.");
+});
 
-//     // Devuelve los códigos de artículo frecuentes como respuesta
-//     res.status(200).json(codigosArticuloFrecuentes);
-//   } catch (error) {
-//     console.error("Error al obtener datos de la base de datos:", error);
-//     res
-//       .status(500)
-//       .json({ error: "Error al obtener datos de la base de datos" });
-//   }
-// };
-import e, { Request, Response } from "express";
-import FacturaCabeza from "../../models/FacturaCabeza";
-import FacturaItems from "../../models/FacturaItems";
-import { Op } from "sequelize";
+// Función para obtener los artículos frecuentes desde la base de datos
+function obtenerArticulosFrecuentes(clienteCodigo: string): Promise<string[]> {
+  return new Promise((resolve, reject) => {
+    const query = `SELECT DISTINCT facturaItems.CodigoArticulo
+                  FROM facturaItems
+                  JOIN facturaCabeza ON facturaItems.DocumentoNumero = facturaCabeza.DocumentoNumero
+                  AND facturaItems.DocumentoSucursal = facturaCabeza.DocumentoSucursal
+                  AND facturaItems.DocumentoTipo = facturaCabeza.DocumentoTipo
+                  JOIN t_articulos ON facturaItems.CodigoArticulo = t_articulos.codigo
+                  AND t_articulos.Activo = 1
+                  AND t_articulos.SeVende = 1
+                  WHERE facturaCabeza.ClienteCodigo = ?`;
 
-export const getArticulosFrecuentes = async (req: Request, res: Response) => {
+    db.query(query, [clienteCodigo], (err, results) => {
+      if (err) {
+        return reject(err);
+      }
+      const codigosFrecuentes = results.map(
+        (row: { CodigoArticulo: any }) => row.CodigoArticulo
+      );
+      resolve(codigosFrecuentes);
+    });
+  });
+}
+
+// Controlador Express para manejar la solicitud y respuesta
+export default async function getArticulosFrecuentes(
+  req: Request,
+  res: Response
+) {
   try {
     const clienteCodigo = req.query.clienteCodigo as string;
-    const fechaDesde = req.query.fechaDesde as string;
-    const fechaHasta = req.query.fechaHasta as string;
 
-    // Realiza la consulta para obtener los códigos de artículo frecuentes
-    const articulosFrecuentes = await FacturaItems.findAll({
-      attributes: ["CodigoArticulo"], // Obtener solo los códigos de artículo
-      include: [
-        {
-          model: FacturaCabeza,
-          as: "facturaCabezaTipo",
-          where: {
-            ClienteCodigo: clienteCodigo, // Filtro por clienteCodigo en FacturaCabeza
-            Fecha: {
-              [Op.between]: [fechaDesde, fechaHasta], // Filtro por fecha
-            },
-          },
-          required: true, // INNER JOIN
-        },
-        {
-          model: FacturaCabeza,
-          as: "facturaCabezaSucursal",
-          where: {
-            ClienteCodigo: clienteCodigo, // Filtro por clienteCodigo en FacturaCabeza
-            Fecha: {
-              [Op.between]: [fechaDesde, fechaHasta], // Filtro por fecha
-            },
-          },
-          required: true, // INNER JOIN
-        },
-        {
-          model: FacturaCabeza,
-          as: "facturaCabezaNumero",
-          where: {
-            ClienteCodigo: clienteCodigo, // Filtro por clienteCodigo en FacturaCabeza
-            Fecha: {
-              [Op.between]: [fechaDesde, fechaHasta], // Filtro por fecha
-            },
-          },
-          required: true, // INNER JOIN
-        },
-      ],
-      raw: true, // Obtener resultados como objetos JSON simples
-    });
+    if (!clienteCodigo) {
+      return res.status(400).json({ error: "clienteCodigo es requerido" });
+    }
 
-    // Extrae los códigos de artículo de los resultados
-    const codigosFrecuentes = [
-      ...new Set(
-        articulosFrecuentes.map((articulo) => articulo.CodigoArticulo)
-      ),
-    ];
+    const articulosFrecuentes = await obtenerArticulosFrecuentes(clienteCodigo);
 
     // Devuelve los códigos de artículo frecuentes como respuesta
-    res.status(200).json(codigosFrecuentes);
+    res.status(200).json(articulosFrecuentes);
   } catch (error) {
     console.error("Error al obtener datos de la base de datos:", error);
     res
       .status(500)
       .json({ error: "Error al obtener datos de la base de datos" });
   }
-};
+}

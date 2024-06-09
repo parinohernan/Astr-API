@@ -10,6 +10,7 @@ class FacturaItems extends Model {
   public Cantidad!: number;
   public PrecioUnitario!: number;
   public PrecioLista!: number;
+  public FacturaCabeza?: FacturaCabeza;
 }
 
 FacturaItems.init(
@@ -17,17 +18,17 @@ FacturaItems.init(
     DocumentoTipo: {
       type: DataTypes.STRING,
       allowNull: false,
-      primaryKey: true,
+      // primaryKey: true,
     },
     DocumentoSucursal: {
       type: DataTypes.STRING,
       allowNull: false,
-      primaryKey: true,
+      // primaryKey: true,
     },
     DocumentoNumero: {
       type: DataTypes.STRING,
       allowNull: false,
-      primaryKey: true,
+      // primaryKey: true,
     },
     CodigoArticulo: {
       type: DataTypes.STRING,
@@ -50,30 +51,29 @@ FacturaItems.init(
   }
 );
 
-// Establecer la relación con la tabla FacturaCabeza
+// Definir relación con FacturaCabeza
 FacturaItems.belongsTo(FacturaCabeza, {
   foreignKey: {
     name: "DocumentoTipo",
     field: "DocumentoTipo",
   },
-  targetKey: "DocumentoTipo",
-  as: "facturaCabezaTipo",
+  onDelete: "CASCADE",
 });
+
 FacturaItems.belongsTo(FacturaCabeza, {
   foreignKey: {
     name: "DocumentoSucursal",
     field: "DocumentoSucursal",
   },
-  targetKey: "DocumentoSucursal",
-  as: "facturaCabezaSucursal",
+  onDelete: "CASCADE",
 });
+
 FacturaItems.belongsTo(FacturaCabeza, {
   foreignKey: {
     name: "DocumentoNumero",
     field: "DocumentoNumero",
   },
-  targetKey: "DocumentoNumero",
-  as: "facturaCabezaNumero",
+  onDelete: "CASCADE",
 });
 
 export default FacturaItems;

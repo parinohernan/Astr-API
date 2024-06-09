@@ -1,7 +1,6 @@
-// src/models/facturaCabeza.ts
 import { DataTypes, Model } from "sequelize";
 import { sequelizeAstrial } from "../config/sequelize.config";
-// import FacturaItems from "./facturaItems";
+import FacturaItems from "./FacturaItems";
 
 class FacturaCabeza extends Model {
   public DocumentoTipo!: string;
@@ -12,7 +11,6 @@ class FacturaCabeza extends Model {
   public VendedorCodigo!: string;
   public PagoTipo!: string;
   public ImporteBruto!: number;
-  // public PorcentajeBonificacion!: number;
   public ImporteBonificado!: number;
   public ListaNumero!: number;
   public Observacion!: string;
@@ -23,12 +21,12 @@ FacturaCabeza.init(
     DocumentoTipo: {
       type: DataTypes.STRING,
       allowNull: false,
-      primaryKey: true,
+      // primaryKey: true,
     },
     DocumentoSucursal: {
       type: DataTypes.STRING,
       allowNull: false,
-      primaryKey: true,
+      // primaryKey: true,
     },
     DocumentoNumero: {
       type: DataTypes.STRING,
@@ -60,7 +58,7 @@ FacturaCabeza.init(
       allowNull: false,
     },
     ListaNumero: {
-      type: DataTypes.DOUBLE,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     Observacion: {
@@ -79,5 +77,11 @@ FacturaCabeza.init(
     timestamps: false,
   }
 );
+
+// Definir relación con FacturaItems
+// FacturaCabeza.hasMany(FacturaItems, {
+//   foreignKey: "FacturaCabezaId",
+//   onDelete: "CASCADE",
+// });
 
 export default FacturaCabeza;

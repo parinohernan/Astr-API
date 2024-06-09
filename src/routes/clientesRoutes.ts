@@ -1,7 +1,7 @@
 // src/routes/clientesRoutes.ts
 import express from "express";
 import { getClientes } from "../controllers/clientesController";
-import { getClientesDeuda } from "../controllers/astrial/clientesDeudaController";
+import getClientesDeuda from "../controllers/astrial/clientesDeudaController";
 
 const router = express.Router();
 

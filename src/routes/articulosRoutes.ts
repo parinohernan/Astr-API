@@ -1,6 +1,6 @@
 import express from "express";
 import { getArticulos } from "../controllers/articulosController";
-import { getArticulosFrecuentes } from "../controllers/astrial/articulosFrecuentesController";
+import getArticulosFrecuentes from "../controllers/astrial/articulosFrecuentesController";
 const router = express.Router();
 
 // Endpoint para obtener todos los artículos

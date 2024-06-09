@@ -5,10 +5,10 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const mysqlConfig = {
-  host: process.env.HOST || "localhost",
-  user: process.env.USER || "root",
-  password: process.env.PASSWORD || "45tr14l",
-  database: process.env.DATABASE || "preventas",
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
 };
 
 export const connectDatabase = async (): Promise<Connection> => {
